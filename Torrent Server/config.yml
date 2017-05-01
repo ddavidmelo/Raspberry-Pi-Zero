@@ -1,0 +1,8 @@
+tasks:
+  task TV:
+    rss:
+      url: http://showrss.info/user/136023.rss?magnets=true&namespaces=true&name=clean&quality=sd&re=no
+    # series:
+      # - the 100
+    all_series: yes
+    download: /home/pi/incomplete
