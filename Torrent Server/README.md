@@ -25,3 +25,6 @@
 
 
 ### Gnome-schedule GUI Setting
+**1.** Set up ```flexas.sh``` like the one in this project [here](https://github.com/ddavidmelo/Raspberry-Pi-Zero/blob/master/Torrent%20Server/flexas.sh)     
+**2.** Run the command in the same folder ```sudo chmod +x filename.sh```     
+**3.** Open Gnome-schedule GUI and set the time and location of the file like this /home/pi/.flexget/flexas.sh     
