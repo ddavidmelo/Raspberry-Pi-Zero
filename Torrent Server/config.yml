@@ -1,8 +1,9 @@
 tasks:
   task TV:
     rss:
-      url: http://showrss.info/user/136023.rss?magnets=true&namespaces=true&name=clean&quality=sd&re=no
+      url: http://showrss.info/user/103613.rss?magnets=true&namespaces=true&name=clean&quality=sd&re=no
+    # if you want to select the series an example:
     # series:
-      # - the 100
+      # - game of thrones
     all_series: yes
     download: /home/pi/incomplete
