@@ -1,6 +1,6 @@
 import ftplib
 import os
-import time;
+import time
 import subprocess
 from requests import get
 
@@ -33,14 +33,24 @@ ip = "Ext ip : " + get('https://api.ipify.org').text
 a.write("<li><a><span alt=\"highlight\" class=\"important\">&#215;</span><span class=\"tag\">"+ip+"</span></a></li>"+os.linesep)
 
 
-for path, subdirs, files in os.walk(r'/home/pi/complete'):
-        a.write("<li><a><span>"+str(path)[18:] +"</span></a></li>"+ os.linesep)
+#for path, subdirs, files in os.walk(r'/media/pi/disk_D/complete'):
+#        a.write("<li><a><span>"+str(path)[26:] +"</span></a></li>"+ os.linesep)
+
+path = '/media/pi/disk_D/complete'
+name_list = os.listdir(path)
+full_list = [os.path.join(path,i) for i in name_list]
+time_sorted_list = sorted(full_list, key=os.path.getmtime, reverse=True)
+
+for pathF in time_sorted_list:
+    stat = os.stat(pathF)
+    a.write("<li><a><span>"+time.ctime(stat.st_mtime)[4:] + " -- " +pathF[26:]+"</span></a></li>"+ os.linesep)
+
 a.close()
 
 
 filename = "pilog.txt"
-ftp = ftplib.FTP('***webhost.com')
-ftp.login("***","***")
+ftp = ftplib.FTP('files.000webhost.com')
+ftp.login("ddavidmelo","dsaasd00")
 ftp.cwd('/public_html')
 ftp.retrlines('LIST')
 myfile = open('/home/pi/Desktop/sitelog.txt','rb')
