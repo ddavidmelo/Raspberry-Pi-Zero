@@ -13,29 +13,20 @@
 Edit jail.local
 »sudo nano /etc/fail2ban/jail.local
 
-[ssh]
-
-enabled  = true
-
-port     = ssh
-
-filter   = sshd
-
-logpath  = /var/log/auth.log
-
-maxretry = 6
-
+[ssh]\n
+enabled  = true\n
+port     = ssh\n
+filter   = sshd\n
+logpath  = /var/log/auth.log\n
+maxretry = 6\n
 bantime  = 3600
 
-[sshd]
-
+[sshd]\n
 port    = ssh\n
 logpath = %(sshd_log)s\n
-backend = %(sshd_backend)s
-
-bantime  = 3600
-
-maxretry = 6
+backend = %(sshd_backend)s\n
+bantime  = 3600\n
+maxretry = 6\n
 
 »sudo service fail2ban restart
 
