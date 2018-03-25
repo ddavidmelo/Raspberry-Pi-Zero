@@ -1,43 +1,18 @@
-# Set OpenVPN
+# Mail Notifier
 
-## Pythnon libraries
-**1.** »sudo apt-get install python-pip
+## Gmail account settings
 
-**2.** »sudo pip install requests 
+Gmail security settings - allowing less secure apps
+https://myaccount.google.com/lesssecureapps
 
-## Firewall (Fail2Ban)
+Add personal filters
 
-»sudo apt install fail2ban
-»sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+## Give permitions to piS.sh 
 
-Edit jail.local
-»sudo nano /etc/fail2ban/jail.local
+»chmod +x /home/pi/.../piS.sh 
 
-[ssh]
+## Run piS.sh every 30 min
 
-enabled  = true
+»crontab -e 
 
-port     = ssh
-
-filter   = sshd
-
-logpath  = /var/log/auth.log
-
-maxretry = 6
-
-bantime  = 3600
-
-[sshd]
-
-port    = ssh
-
-logpath = %(sshd_log)s
-
-backend = %(sshd_backend)s
-
-bantime  = 3600
-
-maxretry = 6
-
-»sudo service fail2ban restart
-
+Edit : */30 * * * * /home/pi/ServidorWeb/piS.sh
