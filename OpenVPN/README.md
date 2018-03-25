@@ -52,9 +52,11 @@ Server (SSH)
 ## Firewall (Fail2Ban)
 
 »sudo apt install fail2ban
+
 »sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 
 Edit jail.local
+
 »sudo nano /etc/fail2ban/jail.local
 
 [ssh]
