@@ -17,19 +17,36 @@
 </FilesMatch>
 
 **4.** Add this :
+
 <Directory />
-        Options FollowSymLinks
-        AllowOverride None
-        Require all denied
+
+Options FollowSymLinks
+
+AllowOverride None
+
+Require all denied
+
 </Directory>
+
 <Directory /usr/share>
-        AllowOverride None
-        Require all granted
+
+AllowOverride None
+
+Require all granted
+
 </Directory>
+
 <Directory /var/www/>
-        Options Indexes FollowSymLinks
-        AllowOverride None
-        Require all granted
-        IndexIgnore *.private
+
+Options Indexes FollowSymLinks
+
+AllowOverride None
+
+Require all granted
+
+IndexIgnore *.private
+
 </Directory>
+
+
 
