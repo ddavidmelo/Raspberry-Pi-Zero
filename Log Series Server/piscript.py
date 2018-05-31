@@ -50,7 +50,7 @@ a.close()
 
 filename = "pilog.txt"
 ftp = ftplib.FTP('files.000webhost.com')
-ftp.login("ddavidmelo","dsaasd00")
+ftp.login("WEBHOST_USER","WEBHOST_PASS")
 ftp.cwd('/public_html')
 ftp.retrlines('LIST')
 myfile = open('/home/pi/Desktop/sitelog.txt','rb')
