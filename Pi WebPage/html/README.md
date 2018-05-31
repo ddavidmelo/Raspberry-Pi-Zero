@@ -13,11 +13,11 @@
 
 **3.** On this AccessFileName .htaccess, add this :
 
-<FilesMatch "\.private">
+-<FilesMatch "\.private">
 
-Require all denied
+-Require all denied
 
-</FilesMatch>
+-</FilesMatch>
 
 **4.** Add this :
 
