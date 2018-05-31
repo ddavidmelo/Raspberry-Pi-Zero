@@ -8,11 +8,14 @@
 
 ## Block files from being viewed by Web clients
 **1.** »cd /etc/apache2
+
 **2.** »sudo nano apache2.conf
+
 **3.** On this AccessFileName .htaccess, add this :
 <FilesMatch "\.private">
         Require all denied
 </FilesMatch>
+
 **4.** Add this :
 <Directory />
         Options FollowSymLinks
