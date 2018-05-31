@@ -12,8 +12,11 @@
 **2.** »sudo nano apache2.conf
 
 **3.** On this AccessFileName .htaccess, add this :
+
 <FilesMatch "\.private">
-        Require all denied
+
+Require all denied
+
 </FilesMatch>
 
 **4.** Add this :
@@ -47,6 +50,3 @@ Require all granted
 IndexIgnore *.private
 
 </Directory>
-
-
-
