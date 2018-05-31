@@ -13,15 +13,15 @@
 
 **3.** On this AccessFileName .htaccess, add this :
 
--<FilesMatch "\.private">
+<FilesMatch "\.private">
 
--Require all denied
+Require all denied
 
--</FilesMatch>
+< / FilesMatch>
 
 **4.** Add this :
 
-<Directory />
+<Directory / >
 
 Options FollowSymLinks
 
@@ -29,7 +29,7 @@ AllowOverride None
 
 Require all denied
 
-</Directory>
+< / Directory>
 
 <Directory /usr/share>
 
@@ -37,7 +37,7 @@ AllowOverride None
 
 Require all granted
 
-</Directory>
+< / Directory>
 
 <Directory /var/www/>
 
@@ -49,4 +49,4 @@ Require all granted
 
 IndexIgnore *.private
 
-</Directory>
+< / Directory>
