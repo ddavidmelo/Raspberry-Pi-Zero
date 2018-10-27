@@ -13,7 +13,6 @@ For this method, alongside your Pi Zero, MicroUSB cable and MicroSD card, only a
 
   or, creat this file ```wpa_supplicant.conf``` with the next content:
        
-       ```
        country=AU
        ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
        update_config=1
@@ -21,7 +20,7 @@ For this method, alongside your Pi Zero, MicroUSB cable and MicroSD card, only a
               ssid="WiFiNetwork"
               psk="Password"
               key_mgmt=WPA-PSK
-       }```
+       }
        
 
 **5.** That's it, eject the SD card from your computer, put it in your Raspberry Pi Zero and connect it via USB to your computer. It will take up to 90s to boot up (shorter on subsequent boots). It should then appear as a USB Ethernet device. You can SSH into it using ```raspberrypi.local``` as the address. For this you can use [Putty](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe).    
