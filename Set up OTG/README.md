@@ -10,8 +10,9 @@ For this method, alongside your Pi Zero, MicroUSB cable and MicroSD card, only a
 **3.** If using a recent release of Jessie (Dec 2016 onwards), then create a new file simply called ```ssh``` in the SD card as well. By default SSH is now disabled so this is required to enable it. **Remember** - Make sure your file doesn't have an extension (like .txt etc)!    
 
 **4.** Finally, open up the ```cmdline.txt```. Be careful with this file, it is very picky with its formatting! Each parameter is seperated by a single space (it does not use newlines). Insert ```modules-load=dwc2,g_ether``` after ```rootwait```. To compare, an edited version of the ```cmdline.txt``` file at the time of writing, can be found [here](http://pastebin.com/WygSaptQ).
+
+  or, creat this file ```wpa_supplicant.conf``` with the next content:
        
-       or, creat this file ```wpa_supplicant.conf``` with the next content:
        ```
        country=AU
        ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
