@@ -1,0 +1,27 @@
+sudo apt-get install python-pip
+
+
+-------------------------------------------------------
+image 
+sudo fbi -T 2 -d /dev/fb1 -noverbose -a adapiluv320x240.jpg
+-------------------------------------------------------
+send commands
+
+who (get the user)
+echo oi >& /dev/tty1
+-------------------------------------------------------
+
+links  
+manual ecrã
+https://cdn-learn.adafruit.com/downloads/pdf/adafruit-2-2-pitft-hat-320-240-primary-display-for-raspberry-pi.pdf
+
+-------------------------------------------------------
+script para o ecrã
+https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/adafruit-pitft.sh
+issiue https://github.com/adafruit/Raspberry-Pi-Installer-Scripts/commit/be3e0fba5d8d486f0b801fc3bc97b25b89c57f72
+https://learn.adafruit.com/adafruit-2-2-pitft-hat-320-240-primary-display-for-raspberry-pi/easy-install
+-------------------------------------------------------
+fail to install pip evdev
+
+http://forum.arduino.cc/index.php?topic=317631.0
+-------------------------------------------------------
