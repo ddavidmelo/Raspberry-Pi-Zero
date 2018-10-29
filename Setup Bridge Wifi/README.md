@@ -1,35 +1,104 @@
-# Set up OTG
+# Setup Bridge connection between two Wifi interfaces
 
-## Setting up Pi Zero OTG - The quick way (No USB keyboard, mouse, HDMI monitor needed)
-For this method, alongside your Pi Zero, MicroUSB cable and MicroSD card, only an additional computer is required, which can be running Windows (with [Bonjour](https://support.apple.com/kb/DL999), iTunes or Quicktime installed), Mac OS or Linux (with Avahi Daemon installed, for example Ubuntu has it built in).
+**1.** Firstly, install hostapd and dnsmasq with the following commands:
 
-**1.** Flash Raspbian Jessie full or Raspbian Jessie Lite [onto the SD card](https://www.raspberrypi.org/documentation/installation/installing-images/README.md). Image that I used [2017-11-29-raspbian-stretch-lite](http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-12-01/), and [Etcher](https://etcher.io/) to burn this image.
+``` sudo apt-get install dnsmasq hostapd  ```
 
-**2.** Once Raspbian is flashed, open up the boot partition (in Windows Explorer, Finder etc) and add to the bottom of the ```config.txt``` file ```dtoverlay=dwc2``` on a new line, then save the file.    
+**2.** After the installation is finished is necessary edit the network interfaces file like that:
 
-**3.** If using a recent release of Jessie (Dec 2016 onwards), then create a new file simply called ```ssh``` in the SD card as well. By default SSH is now disabled so this is required to enable it. **Remember** - Make sure your file doesn't have an extension (like .txt etc)!    
+``` sudo nano /etc/network/interfaces  ```
 
-**4.** Finally, open up the ```cmdline.txt```. Be careful with this file, it is very picky with its formatting! Each parameter is seperated by a single space (it does not use newlines). Insert ```modules-load=dwc2,g_ether``` after ```rootwait```. To compare, an edited version of the ```cmdline.txt``` file at the time of writing, can be found [here](http://pastebin.com/WygSaptQ).
+    auto lo
+    iface lo inet loopback
 
-  or, creat this file ```wpa_supplicant.conf``` with the next content:
-       
-       country=AU
-       ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-       update_config=1
-       network={
-              ssid="WiFiNetwork"
-              psk="Password"
-              key_mgmt=WPA-PSK
-       }
-       
+    # WiFi wlan 1 external dondle
+    allow-hotplug wlan1
+    iface wlan1 inet manual
+        wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
-**5.** That's it, eject the SD card from your computer, put it in your Raspberry Pi Zero and connect it via USB to your computer. It will take up to 90s to boot up (shorter on subsequent boots). It should then appear as a USB Ethernet device. You can SSH into it using ```raspberrypi.local``` as the address. For this you can use [Putty](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe).    
+    # WiFi wlan 0 internal wifi module since I'm using Raspberry pi Zero W
+    auto wlan0
+    allow-hotplug wlan0
+    iface wlan1 inet manual
+    wireless-power off
 
-**6.** In Putty after log in, use this comands to start VNC server:    
-        * ```sudo raspi-config``` , and enable VNC in Interfacing Options    
-        * ```sudo vncserver```    
-        * ```sudo systemctl enable vncserver-x11-serviced.service```, to have VNC Server start automatically when you power the Pi on.   
+**3.** Now Edit the hostapd.conf file to creat the AP:
 
-## Reference
-https://gist.github.com/975e2db164b3ca2b51ae11e45e8fd40a.git
+``` sudo nano /etc/hostapd/hostapd.conf ```
+
+    # Networking interface
+    interface=wlan0
+
+    # WiFi configuration
+    ssid=Router_SSID
+    channel=7
+    hw_mode=g
+    country_code=US
+    wmm_enabled=0
+    macaddr_acl=0
+    ignore_broadcast_ssid=0
+
+    # WiFi security
+    auth_algs=1
+    wpa=2
+    wpa_key_mgmt=WPA-PSK
+    rsn_pairwise=CCMP
+    wpa_pairwise=TKIP
+    wpa_passphrase=WifiPassword
+
+**4.** To enable hostapd to run upon boot you have to edit one last file.
+
+``` sudo nano /etc/default/hostapd ```
+
+    RUN_DAEMON=yes
+    DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+**5.** Configure static IP to wlan0 [our APP]
+
+``` sudo nano /etc/dhcpcd.conf ```
+
+    interface wlan0
+        static ip_address=192.168.2.1/24
+        nohook wpa_supplicant
+
+**6.** To enable the DHCP server to wlan0 [our APP], you will need to give it a range of IP addresses and DNS to hand out
+
+``` sudo nano /etc/dnsmasq.conf ```
+
+    interface=wlan0      # Use the require wireless interface
+      dhcp-range=192.168.2.3,192.168.2.200,255.255.255.0,24h
+      no-resolv
+      no-poll
+      server=8.8.8.8
+      server=8.8.4.4
+
+**7.** Creat bridge connection
+Enable ipv4 ip forwarding
+
+``` sudo nano /etc/sysctl.conf ```
+
+Uncoment the next line
+
+``` net.ipv4.ip_forward=1 ```
+
+Run the next commands
+
+    sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+    sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE
+    sudo iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+    sudo iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT
+
+**8.** Restart hostapd and dnsmasq: 
+
+    sudo service hostapd restart
+    sudo service dnsmasq restart
+
+**9.** Test the hostapd config use this command:
+
+    sudo hostapd /etc/hostapd/hostapd.conf
+
+
+## References
+https://github.com/Phoenix1747/RouteryPi
+
 
