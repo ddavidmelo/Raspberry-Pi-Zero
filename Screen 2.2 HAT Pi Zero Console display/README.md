@@ -1,11 +1,43 @@
-# Set up Console to Screen 2.2 HAT Pi Zero
+# Setup Console to Screen 2.2 HAT Pi Zero
 
-## Setting up Pi Zero OTG - The quick way (No USB keyboard, mouse, HDMI monitor needed)
-For this method, alongside your Pi Zero, MicroUSB cable and MicroSD card, only an additional computer is required, which can be running Windows (with [Bonjour](https://support.apple.com/kb/DL999), iTunes or Quicktime installed), Mac OS or Linux (with Avahi Daemon installed, for example Ubuntu has it built in).
+**1.** First is necessary to install PIP package manager for Python:
 
-**1.** Flash Raspbian Jessie full or Raspbian Jessie Lite [onto the SD card](https://www.raspberrypi.org/documentation/installation/installing-images/README.md). Image that I used [2017-11-29-raspbian-stretch-lite](http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-12-01/), and [Etcher](https://etcher.io/) to burn this image.
+``` sudo apt-get install python-pip ```
 
-**2.** Once Raspbian is flashed, open up the boot partition (in Windows Explorer, Finder etc) and add to the bottom of the ```config.txt``` file ```dtoverlay=dwc2``` on a new line, then save the file.    
+**2.** After that, add the install pre-compile module:
+
+    cd /usr/lib/python2.7/
+    wget "https://github.com/ddavidmelo/Raspberry-Pi-Zero/blob/master/Screen%202.2%20HAT%20Pi%20Zero%20Console%20display/evdev.tar.gz?raw=true" -O evdev.tar.gz --no-check-certificate
+    tar -zxvf evdev.tar.gz
+    rm evdev.tar.gz
+
+**3.** The last step, run the next script:
+
+    cd ~
+    wget "https://raw.githubusercontent.com/ddavidmelo/Raspberry-Pi-Zero/master/Screen%202.2%20HAT%20Pi%20Zero%20Console%20display/adafruit-pitft.sh"
+    chmod +x adafruit-pitft.sh
+    sudo ./adafruit-pitft.sh
 
 ## Reference
-https://gist.github.com/975e2db164b3ca2b51ae11e45e8fd40a.git
+Instalation manual:
+https://learn.adafruit.com/adafruit-2-2-pitft-hat-320-240-primary-display-for-raspberry-pi/easy-install
+
+Original adafruit-pitft.sh script:
+https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/adafruit-pitft.sh
+
+Screen manual:
+https://cdn-learn.adafruit.com/downloads/pdf/adafruit-2-2-pitft-hat-320-240-primary-display-for-raspberry-pi.pdf
+
+Physical connections:
+https://learn.adafruit.com/pigrrl-zero/overview
+
+-------------------------------------------------------
+image 
+sudo fbi -T 2 -d /dev/fb1 -noverbose -a adapiluv320x240.jpg
+-------------------------------------------------------
+send commands
+
+who (get the user)
+echo oi >& /dev/tty1
+-------------------------------------------------------
+
