@@ -20,24 +20,32 @@
 
 ## Reference
 Instalation manual:
+
 https://learn.adafruit.com/adafruit-2-2-pitft-hat-320-240-primary-display-for-raspberry-pi/easy-install
 
 Original adafruit-pitft.sh script:
+
 https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/adafruit-pitft.sh
 
 Screen manual:
+
 https://cdn-learn.adafruit.com/downloads/pdf/adafruit-2-2-pitft-hat-320-240-primary-display-for-raspberry-pi.pdf
 
 Physical connections:
+
 https://learn.adafruit.com/pigrrl-zero/overview
 
 -------------------------------------------------------
+
 image 
 sudo fbi -T 2 -d /dev/fb1 -noverbose -a adapiluv320x240.jpg
+
 -------------------------------------------------------
+
 send commands
 
 who (get the user)
 echo oi >& /dev/tty1
+
 -------------------------------------------------------
 
