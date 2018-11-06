@@ -53,7 +53,7 @@
     RUN_DAEMON=yes
     DAEMON_CONF="/etc/hostapd/hostapd.conf"
 
-**5.** Configure static IP to wlan0 [our APP]
+**5.** Configure static IP to wlan0 [our AP]
 
 ``` sudo nano /etc/dhcpcd.conf ```
 
@@ -61,7 +61,7 @@
         static ip_address=192.168.2.1/24
         nohook wpa_supplicant
 
-**6.** To enable the DHCP server to wlan0 [our APP], you will need to give it a range of IP addresses and DNS to hand out
+**6.** To enable the DHCP server to wlan0 [our AP], you will need to give it a range of IP addresses and DNS to hand out
 
 ``` sudo nano /etc/dnsmasq.conf ```
 
