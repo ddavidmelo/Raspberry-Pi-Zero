@@ -35,7 +35,7 @@ Code of .htaccess file
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule . index.html [L]
 
-**7.** To enable the DHCP server to wlan0 [our APP], you will need to give it a range of IP addresses and DNS to hand out and
+**7.** To enable the DHCP server to wlan0 [our AP], you will need to give it a range of IP addresses and DNS to hand out and redirect everything to our http server:
 
 ``` sudo nano /etc/dnsmasq.conf ```
 
