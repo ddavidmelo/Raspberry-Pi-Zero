@@ -46,6 +46,29 @@
     wpa_pairwise=TKIP
     wpa_passphrase=WifiPassword
 
+Notes: 
+
+    interface > sets the wifi interface to use
+    ssid > sets the ssid of the virtual wifi access point
+    hw_mode> > sets the mode of wifi, depends upon the devices you will be using. It can be a,b,g,n. Not all cards support 'n'.
+    channel > sets the channel for your wifi
+    macaddr_acl > macaddr_acl sets options for mac address filtering. 0 means "accept unless in deny list"
+    ignore_broadcast_ssid > setting ignore_broadcast_ssid to 1 will disable the  broadcasting of ssid
+    auth_algs >
+    #Sets authentication algorithm
+    #1 - only open system authentication
+    #2 - both open system authentication and shared key authentication
+    wpa >
+    #####Sets WPA and WPA2 authentication (remove this section if you don't need encryption)#####
+    #wpa option sets which wpa implementation to use
+    #1 - wpa only
+    #2 - wpa2 only
+    #3 - both
+    wpa_passphrase > sets wpa passphrase required by the clients to authenticate themselves on the network
+    wpa_key_mgmt > sets wpa key management
+    wpa_pairwise > sets encryption used by WPA
+    rsn_pairwise > sets encryption used by WPA2
+
 **4.** To enable hostapd to run upon boot you have to edit one last file.
 
 ``` sudo nano /etc/default/hostapd ```
