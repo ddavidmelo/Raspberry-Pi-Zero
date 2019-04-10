@@ -13,40 +13,69 @@
 
 **3.** On this AccessFileName .htaccess, add this :
 
-<FilesMatch "\.private">
+      <FilesMatch "\.private">
 
-Require all denied
+      Require all denied
 
-< / FilesMatch>
+      < / FilesMatch>
 
 **4.** Add this :
 
-<Directory / >
+      <Directory / >
 
-Options FollowSymLinks
+      Options FollowSymLinks
 
-AllowOverride None
+      AllowOverride None
 
-Require all denied
+      Require all denied
 
-< / Directory>
+      < / Directory>
 
-<Directory /usr/share>
+      <Directory /usr/share>
 
-AllowOverride None
+      AllowOverride None
 
-Require all granted
+      Require all granted
 
-< / Directory>
+      < / Directory>
 
-<Directory /var/www/>
+      <Directory /var/www/>
 
-Options Indexes FollowSymLinks
+      Options Indexes FollowSymLinks
 
-AllowOverride None
+      AllowOverride None
 
-Require all granted
+      Require all granted
 
-IndexIgnore *.private
+      IndexIgnore *.private
 
-< / Directory>
+      < / Directory>
+
+## Enable HTTPS
+**1.** »sudo apt-get install apache2 openssl
+
+**2.** »sudo mkdir -p /etc/ssl/localcerts
+
+**3.** »sudo mkdir -p /etc/ssl/localcerts
+
+**4.** »sudo openssl req -new -x509 -days 365 -nodes -out /etc/ssl/localcerts/apache.pem -keyout /etc/ssl/localcerts/apache.key
+
+**5.** »sudo chmod 600 /etc/ssl/localcerts/apache*
+
+**6.** »sudo a2ensite ssl     if returns error  »sudo a2ensite default-ssl
+
+**7.**
+
+      »cd /etc/apache2/sites-available
+
+      »ls -la
+
+      »sudo nano default-ssl.conf
+
+      SSLCertificateFile /etc/ssl/localcerts/apache.pem
+
+      SSLCertificateKeyFile /etc/ssl/localcerts/apache.key
+
+**8.** »sudo a2ensite efault-ssl.conf
+
+**9.** »sudo service apache2 restart
