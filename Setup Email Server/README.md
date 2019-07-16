@@ -33,15 +33,18 @@ SquirrelMail is the email server that you’ll be using to manage emails on your
     sudo mv /var/www/html/squirrelmail-webmail-1.4.22/ /var/www/html/mail
 
 ``` sudo perl /var/www/html/squirrelmail/config/conf.pl ```
-  -Option 2: Server Settings
-  -Option 1: Domain
-  -Go back: R
-  -Option 4: General Options
-  -Option 11: Allow server-side sorting
-  -Click y
-  -Go back: R
-  -Save: S
-  -Quit: Q
+
+Follow the next options:
+
+    -Option 2: Server Settings
+    -Option 1: Domain
+    -Go back: R
+    -Option 4: General Options
+    -Option 11: Allow server-side sorting
+    -Click y
+    -Go back: R
+    -Save: S
+    -Quit: Q
 
 **5.** **Creating Mail Users**
 
