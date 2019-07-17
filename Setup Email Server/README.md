@@ -32,7 +32,7 @@ SquirrelMail is the email server that you’ll be using to manage emails on your
     sudo chmod 755 -R /var/www/html/squirrelmail-webmail-1.4.22/  
     sudo mv /var/www/html/squirrelmail-webmail-1.4.22/ /var/www/html/mail
 
-``` sudo perl /var/www/html/squirrelmail/config/conf.pl ```
+``` sudo perl /var/www/html/mail/config/conf.pl ```
 
 Follow the next options:
 
