@@ -70,7 +70,29 @@ Follow the next options:
     sudo chown -R www-data:www-data /var/local/squirrelmail/mail
     sudo chmod 777 /var/mail/
 
-**6.** **Error Log**
+**6.** **Solve cookies problem**
+
+In this file:
+
+``` /var/www/html/mail/src/redirect.php ```
+
+Find:
+
+``` header("Location: $redirect_url"); ```
+
+Comment out this line, i.e.:
+
+``` // header("Location: $redirect_url"); ```
+
+immediately after it, put:
+
+    echo "<html><head><META
+    HTTP-EQUIV=\"Refresh\"
+    CONTENT=\"0; 
+    URL=$redirect_url\"></head><body><a 
+    href=$redirect_url>Enter</a></body></html>";
+
+**7.** **Error Log**
 
 ``` tail -F /var/log/mail.err ```
 
